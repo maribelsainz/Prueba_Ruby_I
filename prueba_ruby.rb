@@ -5,11 +5,11 @@ file.close
 alum
 end
 
-def aprobados(nota=5.0)
+def nota_aprobados(nota=5.0)
   if nota >= 5.0
      aprobado = true
-  else
-    aprobado = false
+   else
+     aprobado = false
   end
 end
 
@@ -53,13 +53,22 @@ while opcion != 4 #Termina el programa
           contador +=1
         end
       end
-   puts "\nLa inasistencia de #{alumno} en el curso es: #{contador}"
-  end
+     puts "\nLa inasistencia de #{alumno} en el curso es: #{contador}"
+    end
 
   elsif opcion == 3 #Imprimir en pantalla los nombres de los alumnos aprobados.
+    arreglo_aprobados = []
     arreglo_de_notas.each do |nombre|
       alumno = nombre[0]
+      calificaciones = nombre.map do |nota|
+        nota.to_i
+      end
+      promedio = calificaciones.sum.to_f/(nombre.count-1)
+      if nota_aprobados(promedio)
+        arreglo_aprobados.push(alumno)
+      end
     end
+  puts "\nLos que aprobaron el curso son: #{arreglo_aprobados} "
 
   else
     puts 'Ingrese una opción válida'
@@ -68,7 +77,6 @@ while opcion != 4 #Termina el programa
   menu
   puts 'Ingrese una opción: '
   opcion = gets.chomp.to_i
-
 end
 
 puts 'Chao :)'
